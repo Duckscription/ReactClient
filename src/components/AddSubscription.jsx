@@ -26,12 +26,6 @@ const Header = styled.h1`
   margin: 20px 10px;
 `;
 
-const FormContainer = styled.div`
-  display: grid;
-  font-size:24px
-  margin: 20px;
-`;
-
 const MyInput = styled(Input)
 `
   display: flex;
@@ -67,12 +61,29 @@ const MyRangePicker = styled(RangePicker)`
   }
 `;
 
+const MySelect = styled(Select)`
+    background-color: #FFF9E7;
+    border:none;
+
+`;
+
+
+const textConfig = {
+  rules: [
+    {
+      type: 'string',
+      required: true,
+      message: 'This input is required.',
+    },
+  ],
+};
+
 const rangeConfig = {
   rules: [
     {
       type: 'array',
       required: true,
-      message: 'Please select time!',
+      message: 'Please select time.',
     },
   ],
 };
@@ -82,10 +93,12 @@ function AddSubscription() {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
    const onFinish = (fieldsValue) => {
     // Should format date value before submit.
-    const rangeValue = fieldsValue['range-picker'];
+     const rangeValue = fieldsValue['range-picker'];
+     console.log(rangeValue[0].format('YYYY-MM-DD'))
     const values = {
       ...fieldsValue,
-       'range-picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
+      'dateStart': rangeValue[0].format('YYYY-MM-DD'),
+      'dateEnd' : rangeValue[1].format('YYYY-MM-DD'),
     };
     console.log('Received values of form: ', values);
    };
@@ -94,7 +107,7 @@ function AddSubscription() {
     <MyForm
       onFinish={onFinish} 
     >
-      <Form.Item label="Title" name="title">
+      <Form.Item label="Title" name="title" {...textConfig}>
         <MyInput />
       </Form.Item>
 
@@ -102,19 +115,39 @@ function AddSubscription() {
         <MyRangePicker />
       </Form.Item>
 
-      <Form.Item label="Type" name="type">
-        <Select>
+      <Form.Item label="Price" name="price" {...textConfig}>
+        <MyInput />
+      </Form.Item>
+
+      <Form.Item label="Color" name="color" {...textConfig}>
+        <Radio.Group >
+          <Radio.Button value="pink">
+            <img src={require('../img/pink.svg').default} alt='mySvgImage' />
+          </Radio.Button>
+          <Radio.Button value="blue">
+            <img src={require('../img/blue.svg').default} alt='mySvgImage' />
+          </Radio.Button>
+          <Radio.Button value="orange">
+            <img src={require('../img/orange.svg').default} alt='mySvgImage' />
+            </Radio.Button>
+          <Radio.Button value="green">
+            <img src={require('../img/green.svg').default} alt='mySvgImage' />
+          </Radio.Button>
+        </Radio.Group>
+      </Form.Item>
+
+      <Form.Item label="Type" name="type" {...textConfig}>
+        <MySelect>
           <Select.Option value="Weekly">Weekly</Select.Option>
           <Select.Option value="Monthly">Monthly</Select.Option>
           <Select.Option value="Yearly">Yearly</Select.Option>
-        </Select>
+        </MySelect>
       </Form.Item>
-
       <Form.Item label="URL" name="URL">
         <MyInput />
       </Form.Item>
 
-      <Form.Item label="note"  name="note">
+      <Form.Item label="Note"  name="note">
         <MyInput />
       </Form.Item>
       <Form.Item>

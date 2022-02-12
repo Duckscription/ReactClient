@@ -1,3 +1,39 @@
 .red {
   color: #f3477a;
 }
+
+.ant-radio-button .ant-radio-group-outline {
+  background-color: #f3477a;
+  color: red;
+}
+
+/* .ant-form label {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 10px;
+} */
+
+.ant-select-selector {
+  background: darkblue;
+}
+
+.ant-radio-group .ant-radio-button-wrapper {
+  border: none;
+}
+
+.ant-form .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  display: flex;
+  font-size: 20px;
+  border: none;
+  background-color: #fff9e7;
+  border-radius: 15px;
+  padding: 10px 20px;
+}
+
+.ant-form .fthDbT {
+  background-color: none;
+}
+
+.ant-form .ant-form-item-control-input-content {
+  max-width: 50%;
+}
