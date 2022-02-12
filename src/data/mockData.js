@@ -33,7 +33,7 @@ export async function getAllSubs(accountId) {
   };
 }
 
-async function addNewSub(form, accountId) {
+export async function addNewSub(form, accountId) {
   return {
     msg: `Successfully added new subscription ${form.title}!`,
   };

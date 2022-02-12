@@ -7,7 +7,6 @@ function Subscription() {
   return (
     <div>
       <DisplaySubscription user="1acs" />
-      <AddSubscription />
     </div>
   );
 }

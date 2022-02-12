@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from "styled-components";
+import { addNewSub } from '../data/mockData';
+import "antd/dist/antd.css";
 import { useEffect, useState } from 'react';
-import { Controller, useForm } from "react-hook-form";
+import { AiOutlineCloseCircle} from "react-icons/ai";
 import { Form,
 Input,
 Button,
@@ -10,14 +12,15 @@ Select,
 Cascader,
 DatePicker,
 InputNumber,
-TreeSelect,
-Switch,} from 'antd';
+Switch, Row, Col} from 'antd';
 const { RangePicker } = DatePicker;
 
+
+
 const MyForm = styled(Form)`
-  display: grid;
   font-family : Montserrat;
-  grid-template-columns: 1fr 1fr;
+  margin: 50px;
+  padding: 50px;
 `;
 
 const Header = styled.h1`
@@ -88,9 +91,19 @@ const rangeConfig = {
   ],
 };
 
-function AddSubscription() {
+function AddSubscription(props) {
 
-  const { register, handleSubmit, control, formState: { errors } } = useForm();
+  const [form, setForm] = useState([]);
+
+  useEffect(() => {
+    console.log("hi", props.user)
+      addNewSub( form , props.user).then((result) => {
+      console.log('data', result);
+      });
+
+  }, [form]);
+
+
    const onFinish = (fieldsValue) => {
     // Should format date value before submit.
      const rangeValue = fieldsValue['range-picker'];
@@ -100,25 +113,53 @@ function AddSubscription() {
       'dateStart': rangeValue[0].format('YYYY-MM-DD'),
       'dateEnd' : rangeValue[1].format('YYYY-MM-DD'),
     };
-    console.log('Received values of form: ', values);
+     console.log('Received values of form: ', values);
+     setForm (values)
    };
   
   return (
     <MyForm
       onFinish={onFinish} 
     >
-      <Form.Item label="Title" name="title" {...textConfig}>
-        <MyInput />
-      </Form.Item>
+      <Row>
+        <Col span={24} offset={24}>
+          <AiOutlineCloseCircle className="icons" />
+        </Col>
+      </Row>
+      <Row>
+        <Col span={12}>
+        <Form.Item label="Title" name="title" {...textConfig}>
+          <MyInput />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+            <Form.Item label="Start date - End date" name="range-picker" {...rangeConfig}>
+              <MyRangePicker />
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item label="Start date - End date" name="range-picker" {...rangeConfig}>
-        <MyRangePicker />
-      </Form.Item>
+      <Row>
+        <Col span={12}>
+        <Form.Item label="Price" name="price" {...textConfig}>
+          <MyInput />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item label="Type" name="type" {...textConfig}>
+            <MySelect>
+              <Select.Option value="Weekly">Weekly</Select.Option>
+              <Select.Option value="Monthly">Monthly</Select.Option>
+              <Select.Option value="Yearly">Yearly</Select.Option>
+            </MySelect>
+          </Form.Item>
+        </Col>
+</Row>
 
-      <Form.Item label="Price" name="price" {...textConfig}>
-        <MyInput />
-      </Form.Item>
 
+
+      <Row>
+      <Col span={12}>
       <Form.Item label="Color" name="color" {...textConfig}>
         <Radio.Group >
           <Radio.Button value="pink">
@@ -134,27 +175,30 @@ function AddSubscription() {
             <img src={require('../img/green.svg').default} alt='mySvgImage' />
           </Radio.Button>
         </Radio.Group>
-      </Form.Item>
+          </Form.Item>
+      </Col>
 
-      <Form.Item label="Type" name="type" {...textConfig}>
-        <MySelect>
-          <Select.Option value="Weekly">Weekly</Select.Option>
-          <Select.Option value="Monthly">Monthly</Select.Option>
-          <Select.Option value="Yearly">Yearly</Select.Option>
-        </MySelect>
-      </Form.Item>
-      <Form.Item label="URL" name="URL">
-        <MyInput />
-      </Form.Item>
+        <Col span={12}>
+          <Form.Item label="URL" name="URL">
+            <MyInput />
+        </Form.Item>
+      </Col>  
+      </Row>
 
-      <Form.Item label="Note"  name="note">
-        <MyInput />
-      </Form.Item>
-      <Form.Item>
-        <Submit type="primary" htmlType="submit">
-          Submit
-        </Submit>
-      </Form.Item>
+      <Row>
+        <Col span={16}>
+        <Form.Item label="Note"  name="note">
+          <MyInput />
+          </Form.Item>
+        </Col>
+        <Col offset={ 3} span={4}>
+        <Form.Item>
+          <Submit type="primary" htmlType="submit">
+            Submit
+          </Submit>
+          </Form.Item>
+        </Col>
+      </Row>
     </MyForm>
   );
 };

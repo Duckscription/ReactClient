@@ -3,12 +3,20 @@ import styled from "styled-components";
 import { useEffect, useState } from 'react';
 import greenCircle from '../img/greenCircle.png'
 import { getAllSubs, } from "../data/mockData"
-import { AiOutlinePlusSquare } from "react-icons/ai";
+import { AiOutlinePlusSquare, AiOutlineDelete,  AiOutlineEdit } from "react-icons/ai";
+import AddSubscription from './AddSubscription';
 
 const SubsContainer = styled.div`
-  display: flex;
+
   font-family: Montserrat;
   font-size: 24px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  grid-template-columns: 3fr 1fr 1fr 0.5fr 0.5fr 0.5fr;
+  margin: 40px 0px;
+
 `;
 
 const ContentWrapper = styled.div`
@@ -25,12 +33,14 @@ const HeadCont = styled.h1`
 
 const TypeParagraph = styled.p`
   margin: auto;
-  border: 1px solid;
+  border: none;
+  background-color: rgb(242, 153, 74, 0.2);
   border-radius: 15px;
   width: 132px;
   text-align: center;
   font-size:20px;
   padding: 5px 0px;
+  color: #F2994A;
 `;
 
 const Text = styled.p`
@@ -55,6 +65,7 @@ const AddBtn = styled.button`
 function DisplaySubscription(props) {
 
   const [subsList, setSubsList] = useState([]);
+  const [isAdd, setIsAdd] = useState(false);
 
   useEffect(() => {
       getAllSubs(props.user).then((result) => {
@@ -70,7 +81,7 @@ function DisplaySubscription(props) {
     <>
     {subsList.map((subsList, i) => {
       return  <SubsContainer key={i}>
-        <p>{subsList.title}</p>
+        {subsList.title}
         <ContentWrapper>
           <TypeParagraph>{subsList.type}</TypeParagraph>
         </ContentWrapper>
@@ -83,6 +94,8 @@ function DisplaySubscription(props) {
         <ContentWrapper>
           <Text strong>$ {subsList.price}</Text>
         </ContentWrapper>
+        <AiOutlineEdit />
+        <AiOutlineDelete />
       </SubsContainer>
     })}
   </>
@@ -92,12 +105,21 @@ function DisplaySubscription(props) {
   return (
     <>
       <HeadCont>
-        You've got<span className="red">2 subscriptions</span>
+        You've got<span className="red">{subsList.length} subscriptions</span>
       </HeadCont>
-      <AddBtn>
+      <AddBtn onClick={() => {
+          setIsAdd(true);
+        }}
+      >
         <AiOutlinePlusSquare/>
         Add New
       </AddBtn>
+         {isAdd ? (
+        <AddSubscription user={props.user}/>
+        ) : (
+          <></>
+        )}
+      
         {subscriptions}
     </>
   )

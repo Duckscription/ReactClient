@@ -16,3 +16,8 @@ label {
 .ant-select-selector {
   background: darkblue;
 }
+
+.ant-form-item-has-error
+  :not(.ant-input-disabled):not(.ant-input-borderless).ant-input {
+  background-color: #fff9e7;
+}

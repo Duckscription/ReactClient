@@ -37,3 +37,13 @@
 .ant-form .ant-form-item-control-input-content {
   max-width: 50%;
 }
+
+.icons {
+  width: 20px;
+  height: 20px;
+}
+
+.ant-form {
+  border: solid 1px black;
+  border-radius: 30px;
+}
