@@ -1,13 +1,16 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import greenCircle from '../img/greenCircle.png'
-import { getAllSubs, } from "../data/mockData"
-import { AiOutlinePlusSquare, AiOutlineDelete,  AiOutlineEdit } from "react-icons/ai";
+import greenCircle from '../img/greenCircle.png';
+import { getAllSubs } from '../data/mockData';
+import {
+  AiOutlinePlusSquare,
+  AiOutlineDelete,
+  AiOutlineEdit,
+} from 'react-icons/ai';
 import AddSubscription from './AddSubscription';
 
 const SubsContainer = styled.div`
-
   font-family: Montserrat;
   font-size: 24px;
   display: grid;
@@ -16,11 +19,10 @@ const SubsContainer = styled.div`
   justify-content: center;
   grid-template-columns: 3fr 1fr 1fr 0.5fr 0.5fr 0.5fr;
   margin: 40px 0px;
-
 `;
 
 const ContentWrapper = styled.div`
-  margin:auto 5px;
+  margin: auto 5px;
 `;
 
 const HeadCont = styled.h1`
@@ -28,7 +30,7 @@ const HeadCont = styled.h1`
   font-family: Poppins;
   font-weight: bold;
   font-size: 36px;
-  color: ${props => props.strong ? "#F3477A" : "black"};
+  color: ${(props) => (props.strong ? '#F3477A' : 'black')};
 `;
 
 const TypeParagraph = styled.p`
@@ -38,23 +40,22 @@ const TypeParagraph = styled.p`
   border-radius: 15px;
   width: 132px;
   text-align: center;
-  font-size:20px;
+  font-size: 20px;
   padding: 5px 0px;
-  color: #F2994A;
+  color: #f2994a;
 `;
 
 const Text = styled.p`
-  color: ${props => props.strong ? "#F3477A" : "black"};
-  font-weight: ${props => props.strong ? "bold" : "normal"};
+  color: ${(props) => (props.strong ? '#F3477A' : 'black')};
+  font-weight: ${(props) => (props.strong ? 'bold' : 'normal')};
   font-size: 12px;
-  
 `;
 
 const AddBtn = styled.button`
   font-size: 15px;
-  font-family:Poppins;
-  background-color:#71A894;
-  width : 132px;
+  font-family: Poppins;
+  background-color: #71a894;
+  width: 132px;
   padding: 5px 0px;
   border: none;
   border-radius: 15px;
@@ -62,67 +63,65 @@ const AddBtn = styled.button`
   color: white;
   height: 40px;
   margin: auto 0px;
-`
+`;
 
 function DisplaySubscription(props) {
-
   const [subsList, setSubsList] = useState([]);
   const [isAdd, setIsAdd] = useState(false);
 
   useEffect(() => {
-      getAllSubs(props.user).then((result) => {
+    getAllSubs(props.user).then((result) => {
       console.log('Sources', result.subs);
-        setSubsList(result.subs);
-      });
-
+      setSubsList(result.subs);
+    });
   }, []);
 
-  console.log(subsList)
+  console.log(subsList);
 
   const subscriptions = (
     <>
-    {subsList.map((subsList, i) => {
-      return  <SubsContainer key={i}>
-        {subsList.title}
-        <ContentWrapper>
-          <TypeParagraph>{subsList.type}</TypeParagraph>
-        </ContentWrapper>
-        <ContentWrapper>
-          <Text>
-            <img src={greenCircle} />
-            {subsList.dateStart}~{subsList.dateEnd}
-          </Text>
-        </ContentWrapper>
-        <ContentWrapper>
-          <Text strong>$ {subsList.price}</Text>
-        </ContentWrapper>
-        <AiOutlineEdit />
-        <AiOutlineDelete />
-      </SubsContainer>
-    })}
-  </>
-  )
-
+      {subsList.map((subsList, i) => {
+        return (
+          <SubsContainer key={i}>
+            {subsList.title}
+            <ContentWrapper>
+              <TypeParagraph>{subsList.type}</TypeParagraph>
+            </ContentWrapper>
+            <ContentWrapper>
+              <Text>
+                <img src={greenCircle} />
+                {subsList.dateStart}~{subsList.dateEnd}
+              </Text>
+            </ContentWrapper>
+            <ContentWrapper>
+              <Text strong>$ {subsList.price}</Text>
+            </ContentWrapper>
+            <AiOutlineEdit />
+            <AiOutlineDelete />
+          </SubsContainer>
+        );
+      })}
+    </>
+  );
 
   return (
     <>
       <HeadCont>
         You've got<span className="red">{subsList.length} subscriptions</span>
-        <AddBtn onClick={() => {
+        <AddBtn
+          onClick={() => {
             setIsAdd(true);
           }}
         >
-          <AiOutlinePlusSquare/>
+          <AiOutlinePlusSquare />
           Add New
         </AddBtn>
       </HeadCont>
 
-      {isAdd && (
-        <AddSubscription user={props.user} sendToRoles={setIsAdd} />
-      )}
-        {subscriptions}
+      {isAdd && <AddSubscription user={props.user} sendToRoles={setIsAdd} />}
+      {subscriptions}
     </>
-  )
+  );
 }
 
-export default DisplaySubscription
+export default DisplaySubscription;
