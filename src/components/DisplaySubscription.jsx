@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import greenCircle from '../img/greenCircle.png';
-import { getAllSubs } from '../data/mockData';
+// import { getAllSubs } from '../data/mockData';
+import { getAllSubs } from '../api/network';
 import {
   AiOutlinePlusSquare,
   AiOutlineDelete,
@@ -70,7 +71,7 @@ function DisplaySubscription(props) {
   const [isAdd, setIsAdd] = useState(false);
 
   useEffect(() => {
-    getAllSubs(props.user).then((result) => {
+    getAllSubs(props.userId).then((result) => {
       console.log('Sources', result.subs);
       setSubsList(result.subs);
     });

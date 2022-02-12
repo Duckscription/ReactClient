@@ -6,7 +6,7 @@ import AddSubscription from "../components/AddSubscription";
 function Subscription() {
   return (
     <div>
-      <DisplaySubscription user="1acs" />
+      <DisplaySubscription userId="1asd" />
     </div>
   );
 }
