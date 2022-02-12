@@ -60,6 +60,8 @@ const AddBtn = styled.button`
   border-radius: 15px;
   width: 169px;
   color: white;
+  height: 40px;
+  margin: auto 0px;
 `
 
 function DisplaySubscription(props) {
@@ -106,20 +108,18 @@ function DisplaySubscription(props) {
     <>
       <HeadCont>
         You've got<span className="red">{subsList.length} subscriptions</span>
+        <AddBtn onClick={() => {
+            setIsAdd(true);
+          }}
+        >
+          <AiOutlinePlusSquare/>
+          Add New
+        </AddBtn>
       </HeadCont>
-      <AddBtn onClick={() => {
-          setIsAdd(true);
-        }}
-      >
-        <AiOutlinePlusSquare/>
-        Add New
-      </AddBtn>
-         {isAdd ? (
-        <AddSubscription user={props.user}/>
-        ) : (
-          <></>
-        )}
-      
+
+      {isAdd && (
+        <AddSubscription user={props.user} sendToRoles={setIsAdd} />
+      )}
         {subscriptions}
     </>
   )

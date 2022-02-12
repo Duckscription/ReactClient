@@ -19,8 +19,9 @@ const { RangePicker } = DatePicker;
 
 const MyForm = styled(Form)`
   font-family : Montserrat;
-  margin: 50px;
+  margin: auto;
   padding: 50px;
+  width: 60%;
 `;
 
 const Header = styled.h1`
@@ -36,7 +37,6 @@ const MyInput = styled(Input)
   border: none;
   background-color: #FFF9E7;
   border-radius: 15px;
-  padding: 10px 20px;
 `;
 
 
@@ -123,7 +123,8 @@ function AddSubscription(props) {
     >
       <Row>
         <Col span={24} offset={24}>
-          <AiOutlineCloseCircle className="icons" />
+          <AiOutlineCloseCircle onClick={() => { props.sendToRoles(false) }}
+            className="icons" />
         </Col>
       </Row>
       <Row>

@@ -46,4 +46,18 @@
 .ant-form {
   border: solid 1px black;
   border-radius: 30px;
+  padding: 0px;
+}
+
+.ant-col .ant-form-item-control {
+  margin: auto;
+}
+
+.ant-form-item .ant-select {
+  border-radius: 15px;
+  font-size: 20px;
+}
+
+.ant-row .ant-form-item {
+  margin-bottom: 0px;
 }
