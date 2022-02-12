@@ -31,8 +31,7 @@ const Header = styled.h1`
 `;
 
 const MyInput = styled(Input)
-`
-  display: flex;
+` d
   font-size:20px;
   border: none;
   background-color: #FFF9E7;

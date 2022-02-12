@@ -5,6 +5,7 @@ import greenCircle from '../img/greenCircle.png'
 import { getAllSubs, } from "../data/mockData"
 import { AiOutlinePlusSquare, AiOutlineDelete,  AiOutlineEdit } from "react-icons/ai";
 import AddSubscription from './AddSubscription';
+import { useForm } from "react-hook-form";
 
 const SubsContainer = styled.div`
 
@@ -29,6 +30,7 @@ const HeadCont = styled.h1`
   font-weight: bold;
   font-size: 36px;
   color: ${props => props.strong ? "#F3477A" : "black"};
+  margin: auto;
 `;
 
 const TypeParagraph = styled.p`
@@ -68,6 +70,7 @@ function DisplaySubscription(props) {
 
   const [subsList, setSubsList] = useState([]);
   const [isAdd, setIsAdd] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
       getAllSubs(props.user).then((result) => {
@@ -77,7 +80,33 @@ function DisplaySubscription(props) {
 
   }, []);
 
-  console.log(subsList)
+const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
+  const editingSubs = (subId) => (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} >
+        <SubsContainer>
+         <ContentWrapper>
+            <TypeParagraph>{subsList.type}</TypeParagraph>
+          </ContentWrapper>
+          <ContentWrapper>
+            <Text>
+              <img src={greenCircle} />
+              {subsList.dateStart}~{subsList.dateEnd}
+            </Text>
+          </ContentWrapper>
+          <ContentWrapper>
+            <Text strong>$ {subsList.price}</Text>
+          </ContentWrapper>
+          <AiOutlineEdit />
+          <AiOutlineDelete />
+        </SubsContainer>
+      </form>
+  </>
+  );
+
+      
+
 
   const subscriptions = (
     <>
@@ -96,7 +125,8 @@ function DisplaySubscription(props) {
         <ContentWrapper>
           <Text strong>$ {subsList.price}</Text>
         </ContentWrapper>
-        <AiOutlineEdit />
+        <AiOutlineEdit onClick={editingSubs(subsList.id)}
+        />
         <AiOutlineDelete />
       </SubsContainer>
     })}
