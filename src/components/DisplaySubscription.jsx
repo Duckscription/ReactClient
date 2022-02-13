@@ -30,7 +30,7 @@ const HeadCont = styled.h1`
   font-weight: bold;
   font-size: 36px;
   color: ${props => props.strong ? "#F3477A" : "black"};
-  margin: auto;
+  margin: 0px 60px;
 `;
 
 const TypeParagraph = styled.p`
@@ -125,7 +125,9 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
         <ContentWrapper>
           <Text strong>$ {subsList.price}</Text>
         </ContentWrapper>
-        <AiOutlineEdit onClick={editingSubs(subsList.id)}
+        <AiOutlineEdit onClick={() => {
+          setIsEdit(true);
+        }}
         />
         <AiOutlineDelete />
       </SubsContainer>
@@ -137,7 +139,9 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
   return (
     <>
       <HeadCont>
-        You've got<span className="red">{subsList.length} subscriptions</span>
+        You've got &nbsp;
+        <span className="red">
+          {subsList.length} subscriptions </span>
         <AddBtn onClick={() => {
             setIsAdd(true);
           }}
@@ -150,7 +154,12 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
       {isAdd && (
         <AddSubscription user={props.user} sendToRoles={setIsAdd} />
       )}
-        {subscriptions}
+
+      {isEdit ? (
+          <editingSubs/>
+        ) : (
+        subscriptions
+        )}
     </>
   )
 }

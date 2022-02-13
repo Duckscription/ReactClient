@@ -15,13 +15,18 @@ InputNumber,
 Switch, Row, Col} from 'antd';
 const { RangePicker } = DatePicker;
 
-
-
 const MyForm = styled(Form)`
   font-family : Montserrat;
-  margin: auto;
   padding: 50px;
   width: 60%;
+  background: white;
+  border: none;
+  position: absolute;
+margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+text-align: center;
 `;
 
 const Header = styled.h1`
@@ -121,7 +126,7 @@ function AddSubscription(props) {
       onFinish={onFinish} 
     >
       <Row>
-        <Col span={24} offset={24}>
+        <Col>
           <AiOutlineCloseCircle onClick={() => { props.sendToRoles(false) }}
             className="icons" />
         </Col>
