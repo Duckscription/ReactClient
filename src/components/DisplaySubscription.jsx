@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import greenCircle from '../img/greenCircle.png';
 // import { getAllSubs } from '../data/mockData';
-import { getAllSubs, getSub } from '../api/network';
+import { getAllSubs, getSub, deleteSub } from '../api/network';
 import { formatDate } from '../api/networkUtils';
 import {
   AiOutlinePlusSquare,
@@ -75,11 +75,12 @@ function DisplaySubscription(props) {
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [subId, setSubId] = useState(false);
+  const [subIdDel, setSubIdDel] = useState();
   const [editList, setEditList] = useState();
 
   useEffect(() => {
     getAllSubs(props.userId).then((result) => {
-      console.log('getAllSubs', result.data);
+      // console.log('getAllSubs', result.data);
       setSubsList(result.data.subs);
     });
   }, [subsList]);
@@ -91,6 +92,12 @@ function DisplaySubscription(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
+
+  useEffect(() => {
+      deleteSub(subIdDel).then((result) => {
+      console.log('delete', result.data);
+    });
+  }, [subIdDel]);
 
 
   const subscriptions = (
@@ -120,7 +127,7 @@ function DisplaySubscription(props) {
             />
             <AiOutlineDelete
             onClick={() => {
-              setSubId(subsList._id);
+              setSubIdDel(subsList._id);
             }}
             />
           </SubsContainer>
