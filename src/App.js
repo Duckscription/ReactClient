@@ -13,8 +13,6 @@ function App() {
         <Route path="/" exact element={<Main />} />
         <Route path="/subscriptions" exact element={<Subscription />} />
         <Route path="/signIn" exact element={<SignIn />} />
-        {/* component is not using anymore -> change to element */}
-        {/* <Route path="/Home" component={subscription} /> */}
       </Routes>
     </Router>
   );
