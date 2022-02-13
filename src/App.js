@@ -1,8 +1,9 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar";
-import Subscription from "./pages/Subscription";
-import SignIn from "./pages/SignIn";
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/navbar';
+import Subscription from './pages/Subscription';
+import SignIn from './pages/SignIn';
+import Main from './pages/Main';
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Subscription />} />
         <Route path="/signIn" exact element={<SignIn />} />
+
+        <Route path="/main" exact element={<Main />} />
+
         {/* component is not using anymore -> change to element */}
         {/* <Route path="/Home" component={subscription} /> */}
       </Routes>
