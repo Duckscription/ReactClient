@@ -17,8 +17,17 @@
   background: darkblue;
 }
 
+.ant-radio-group {
+  display: flex;
+}
+
 .ant-radio-group .ant-radio-button-wrapper {
-  border: none;
+  border: none !important;
+  padding: 0 10px;
+}
+
+.ant-radio-button-wrapper:not(:first-child)::before {
+  display: none !important;
 }
 
 .ant-form .ant-select:not(.ant-select-customize-input) .ant-select-selector {
@@ -27,7 +36,13 @@
   border: none;
   background-color: #fff9e7;
   border-radius: 15px;
-  padding: 10px 20px;
+  padding: 8px 20px;
+}
+
+.ant-select-single.ant-select-show-arrow .ant-select-selection-item,
+.ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+  font-size: 14px;
+  line-height: 14px !important;
 }
 
 .ant-form .fthDbT {
@@ -35,7 +50,7 @@
 }
 
 .ant-form .ant-form-item-control-input-content {
-  max-width: 50%;
+  max-width: 90%;
 }
 
 .icons {

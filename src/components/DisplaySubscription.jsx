@@ -139,18 +139,20 @@ function DisplaySubscription(props) {
 
   return (
     <>
-      <HeadCont>
-        You've got &nbsp;
-        <span className="red">{subsList.length} subscriptions </span>
-        <AddBtn
-          onClick={() => {
-            setIsAdd(true);
-          }}
-        >
-          <AiOutlinePlusSquare />
-          Add New
-        </AddBtn>
-      </HeadCont>
+         <div className='flex flex-center'>
+          <HeadCont>
+            You've got &nbsp;
+            <span className="red">{subsList.length} subscriptions </span>
+          </HeadCont>
+          <AddBtn
+            onClick={() => {
+              setIsAdd(true);
+            }}
+          >
+            <AiOutlinePlusSquare />
+            Add New
+          </AddBtn>
+        </div>
 
       {isAdd && <AddSubscription user={props.userId} sendToRoles={setIsAdd} />}
       {isEdit ?
