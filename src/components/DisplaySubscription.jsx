@@ -12,8 +12,9 @@ import {
 } from 'react-icons/ai';
 import AddSubscription from './AddSubscription';
 import { useForm } from 'react-hook-form';
+import EditingSubs from './editingSubs';
 
-const SubsContainer = styled.div`
+export const SubsContainer = styled.div`
   font-family: Montserrat;
   font-size: 24px;
   display: grid;
@@ -24,11 +25,11 @@ const SubsContainer = styled.div`
   margin: 40px 0px;
 `;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   margin: auto 5px;
 `;
 
-const HeadCont = styled.h1`
+export const HeadCont = styled.h1`
   display: flex;
   font-family: Poppins;
   font-weight: bold;
@@ -37,7 +38,7 @@ const HeadCont = styled.h1`
   margin: 0px 60px;
 `;
 
-const TypeParagraph = styled.p`
+export const TypeParagraph = styled.p`
   margin: auto;
   border: none;
   background-color: rgb(242, 153, 74, 0.2);
@@ -49,13 +50,13 @@ const TypeParagraph = styled.p`
   color: #f2994a;
 `;
 
-const Text = styled.p`
+  export const Text = styled.p`
   color: ${(props) => (props.strong ? '#F3477A' : 'black')};
   font-weight: ${(props) => (props.strong ? 'bold' : 'normal')};
   font-size: 12px;
 `;
 
-const AddBtn = styled.button`
+export const AddBtn = styled.button`
   font-size: 15px;
   font-family: Poppins;
   background-color: #71a894;
@@ -91,20 +92,14 @@ function DisplaySubscription(props) {
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
-  const editingSubs = (subId) => {
-
-    console.log(subId)
-    getSub(subId).then((result) => {
-      console.log('getAllSubs', result.data.sub);
-      // const data = result.data.sub
-      // const title = {re}
-    })
-  
-  }
-    
-  
-  
-
+  // const editingSubs = (subId) => {
+  //   console.log(subId)
+  //   getSub(subId).then((result) => {
+  //     setEditList(result.data.sub)
+  //   }).then(() => {
+  //     editingRoles()
+  //   })
+  // }
 
   const subscriptions = (
     <>
@@ -138,6 +133,7 @@ function DisplaySubscription(props) {
     </>
   );
 
+
   return (
     <>
       <HeadCont>
@@ -156,9 +152,8 @@ function DisplaySubscription(props) {
       {isAdd && <AddSubscription user={props.userId} sendToRoles={setIsAdd} />}
       {isEdit ?
         <>  
-          {editingSubs(subId)}
+          <EditingSubs subId={subId} />
         </>
-        
         : subscriptions}
     </>
   );
