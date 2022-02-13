@@ -116,12 +116,9 @@ function AddSubscription(props) {
     };
     console.log('Received values of form: ', values);
     setForm(values);
-    sendToRoes();
+   
   };
 
-  const sendToRoes = () => {
-     props.sendToRoles(false);
-  }
 
   return (
     <MyForm onFinish={onFinish}>
@@ -129,7 +126,7 @@ function AddSubscription(props) {
         <Col>
           <AiOutlineCloseCircle
             onClick={() => {
-              props.sendToRoles(false);
+              props.sendTo(false);
             }}
             className="icons"
           />

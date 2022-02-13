@@ -157,7 +157,7 @@ function DisplaySubscription(props) {
       {isAdd && <AddSubscription user={props.userId} sendToRoles={setIsAdd} />}
       {isEdit ?
         <>  
-          <EditingSubs subId={subId} sendToSub={setIsAdd}/>
+          <EditingSubs subId={subId} sendTo={setIsEdit}/>
         </>
         : subscriptions}
     </>
