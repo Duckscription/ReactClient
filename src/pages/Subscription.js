@@ -6,9 +6,13 @@ import UserProfile from "../components/UserProfile";
 
 function Subscription() {
   return (
-    <div>
-      <DisplaySubscription user="1acs" />
-      <UserProfile user="1acx" />
+    <div className="subsWrapper">
+      <div>
+        <DisplaySubscription user="1acs" />
+      </div>
+      <div>
+        <UserProfile user="1acx" />
+      </div>
     </div>
   );
 }
