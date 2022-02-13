@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import greenCircle from '../img/greenCircle.png';
 // import { getAllSubs } from '../data/mockData';
-import { getAllSubs } from '../api/network';
+import { getAllSubs, updateSub } from '../api/network';
 import { formatDate } from '../api/networkUtils';
 import {
   AiOutlinePlusSquare,
@@ -91,22 +91,6 @@ function DisplaySubscription(props) {
   const editingSubs = (subId) => (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <SubsContainer>
-          <ContentWrapper>
-            <TypeParagraph>{subsList.type}</TypeParagraph>
-          </ContentWrapper>
-          <ContentWrapper>
-            <Text>
-              <img src={greenCircle} />
-              {subsList.dateStart}~{subsList.dateEnd}
-            </Text>
-          </ContentWrapper>
-          <ContentWrapper>
-            <Text strong>$ {subsList.price}</Text>
-          </ContentWrapper>
-          <AiOutlineEdit />
-          <AiOutlineDelete />
-        </SubsContainer>
       </form>
     </>
   );
@@ -114,6 +98,7 @@ function DisplaySubscription(props) {
   const subscriptions = (
     <>
       {subsList.map((subsList, i) => {
+       const subId = subsList._id
         return (
           <SubsContainer key={i}>
             {subsList.title}
@@ -129,10 +114,12 @@ function DisplaySubscription(props) {
             </ContentWrapper>
             <ContentWrapper>
               <Text strong>$ {subsList.price}</Text>
+              
             </ContentWrapper>
             <AiOutlineEdit
               onClick={() => {
                 setIsEdit(true);
+                editingSubs(subId);
               }}
             />
             <AiOutlineDelete />

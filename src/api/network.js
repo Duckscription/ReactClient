@@ -11,6 +11,7 @@ export async function addNewSub(data) {
 export async function updateSub(subId, formContent) {
   return await axios.put(`/api/subs/update/${subId}`, { data: formContent });
 }
+
 export async function deleteSub(subId) {
   return await axios.delete(`/api/entry/delete/${subId}`);
 }
