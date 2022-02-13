@@ -11,6 +11,7 @@ import {
   AiOutlineEdit,
 } from 'react-icons/ai';
 import AddSubscription from './AddSubscription';
+import { useForm } from "react-hook-form";
 
 const SubsContainer = styled.div`
   font-family: Montserrat;
@@ -32,7 +33,8 @@ const HeadCont = styled.h1`
   font-family: Poppins;
   font-weight: bold;
   font-size: 36px;
-  color: ${(props) => (props.strong ? '#F3477A' : 'black')};
+  color: ${props => props.strong ? "#F3477A" : "black"};
+  margin: auto;
 `;
 
 const TypeParagraph = styled.p`
@@ -70,6 +72,7 @@ const AddBtn = styled.button`
 function DisplaySubscription(props) {
   const [subsList, setSubsList] = useState([]);
   const [isAdd, setIsAdd] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     getAllSubs(props.userId).then((result) => {
@@ -78,32 +81,61 @@ function DisplaySubscription(props) {
     });
   }, []);
 
+const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
+  const editingSubs = (subId) => (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} >
+        <SubsContainer>
+         <ContentWrapper>
+            <TypeParagraph>{subsList.type}</TypeParagraph>
+          </ContentWrapper>
+          <ContentWrapper>
+            <Text>
+              <img src={greenCircle} />
+              {subsList.dateStart}~{subsList.dateEnd}
+            </Text>
+          </ContentWrapper>
+          <ContentWrapper>
+            <Text strong>$ {subsList.price}</Text>
+          </ContentWrapper>
+          <AiOutlineEdit />
+          <AiOutlineDelete />
+        </SubsContainer>
+      </form>
+  </>
+  );
+
+
+
+
   const subscriptions = (
     <>
-      {subsList.map((subsList, i) => {
-        return (
-          <SubsContainer key={i}>
-            {subsList.title}
-            <ContentWrapper>
-              <TypeParagraph>{subsList.type}</TypeParagraph>
-            </ContentWrapper>
-            <ContentWrapper>
-              <Text>
-                <img src={greenCircle} />
-                {formatDate(subsList.dateStart, 'd.m.yy')}~
-                {formatDate(subsList.dateEnd, 'd.m.yy')}
-              </Text>
-            </ContentWrapper>
-            <ContentWrapper>
-              <Text strong>$ {subsList.price}</Text>
-            </ContentWrapper>
-            <AiOutlineEdit />
-            <AiOutlineDelete />
-          </SubsContainer>
-        );
-      })}
-    </>
-  );
+    {subsList.map((subsList, i) => {
+      return (
+        <SubsContainer key={i}>
+          {subsList.title}
+          <ContentWrapper>
+            <TypeParagraph>{subsList.type}</TypeParagraph>
+          </ContentWrapper>
+          <ContentWrapper>
+            <Text>
+              <img src={greenCircle} />
+              {formatDate(subsList.dateStart, 'd.m.yy')}~
+              {formatDate(subsList.dateEnd, 'd.m.yy')}
+            </Text>
+          </ContentWrapper>
+          <ContentWrapper>
+            <Text strong>$ {subsList.price}</Text>
+          </ContentWrapper>
+          <AiOutlineEdit onClick={editingSubs(subsList.id)} />
+          <AiOutlineDelete />
+        </SubsContainer>
+      );
+    })}
+  </>
+  )
+
 
   return (
     <>

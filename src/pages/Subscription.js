@@ -2,11 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import DisplaySubscription from "../components/DisplaySubscription";
 import AddSubscription from "../components/AddSubscription";
+import UserProfile from "../components/UserProfile";
 
 function Subscription() {
   return (
-    <div>
-      <DisplaySubscription userId="1asd" />
+    <div className="subsWrapper">
+      <div>
+        <DisplaySubscription userId="1acs" />
+      </div>
+      <div>
+        <UserProfile userId="1acx" />
+      </div>
     </div>
   );
 }

@@ -61,3 +61,35 @@
 .ant-row .ant-form-item {
   margin-bottom: 0px;
 }
+
+.userProfileWrapper {
+  height: 90vh;
+  width: 35vh;
+  background-color: #fff0bf;
+  border-radius: 30px;
+  padding: 30px;
+  border: solid 10px white;
+}
+
+.userImg {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.subsWrapper {
+  display: flex;
+  background-image: url(img/pattern.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

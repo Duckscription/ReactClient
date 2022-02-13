@@ -33,9 +33,9 @@ const Header = styled.h1`
   margin: 20px 10px;
 `;
 
-const MyInput = styled(Input)`
-  display: flex;
-  font-size: 20px;
+const MyInput = styled(Input)
+` d
+  font-size:20px;
   border: none;
   background-color: #fff9e7;
   border-radius: 15px;
