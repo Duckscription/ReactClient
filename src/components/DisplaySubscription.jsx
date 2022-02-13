@@ -82,7 +82,7 @@ function DisplaySubscription(props) {
       console.log('getAllSubs', result.data);
       setSubsList(result.data.subs);
     });
-  }, []);
+  }, [subsList]);
 
   const {
     register,
@@ -92,14 +92,6 @@ function DisplaySubscription(props) {
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
-  // const editingSubs = (subId) => {
-  //   console.log(subId)
-  //   getSub(subId).then((result) => {
-  //     setEditList(result.data.sub)
-  //   }).then(() => {
-  //     editingRoles()
-  //   })
-  // }
 
   const subscriptions = (
     <>
@@ -126,7 +118,11 @@ function DisplaySubscription(props) {
                 setSubId(subsList._id);
               }}
             />
-            <AiOutlineDelete />
+            <AiOutlineDelete
+            onClick={() => {
+              setSubId(subsList._id);
+            }}
+            />
           </SubsContainer>
         );
       })}
@@ -152,7 +148,7 @@ function DisplaySubscription(props) {
       {isAdd && <AddSubscription user={props.userId} sendToRoles={setIsAdd} />}
       {isEdit ?
         <>  
-          <EditingSubs subId={subId} />
+          <EditingSubs subId={subId} sendToSub={setIsAdd}/>
         </>
         : subscriptions}
     </>
