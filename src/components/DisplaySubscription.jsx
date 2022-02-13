@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import greenCircle from '../img/greenCircle.png';
 // import { getAllSubs } from '../data/mockData';
-import { getAllSubs, updateSub } from '../api/network';
+import { getAllSubs, getSub } from '../api/network';
 import { formatDate } from '../api/networkUtils';
 import {
   AiOutlinePlusSquare,
@@ -73,6 +73,8 @@ function DisplaySubscription(props) {
   const [subsList, setSubsList] = useState([]);
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [subId, setSubId] = useState(false);
+  const [editList, setEditList] = useState();
 
   useEffect(() => {
     getAllSubs(props.userId).then((result) => {
@@ -88,12 +90,21 @@ function DisplaySubscription(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
-  const editingSubs = (subId) => (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-      </form>
-    </>
-  );
+
+  const editingSubs = (subId) => {
+
+    console.log(subId)
+    getSub(subId).then((result) => {
+      console.log('getAllSubs', result.data.sub);
+      // const data = result.data.sub
+      // const title = {re}
+    })
+
+  }
+
+
+
+
 
   const subscriptions = (
     <>
@@ -114,12 +125,12 @@ function DisplaySubscription(props) {
             </ContentWrapper>
             <ContentWrapper>
               <Text strong>$ {subsList.price}</Text>
-              
+
             </ContentWrapper>
             <AiOutlineEdit
               onClick={() => {
                 setIsEdit(true);
-                editingSubs(subId);
+                setSubId(subsList._id);
               }}
             />
             <AiOutlineDelete />
@@ -145,8 +156,12 @@ function DisplaySubscription(props) {
       </HeadCont>
 
       {isAdd && <AddSubscription user={props.userId} sendToRoles={setIsAdd} />}
+      {isEdit ?
+        <>
+          {editingSubs(subId)}
+        </>
 
-      {isEdit ? <editingSubs /> : subscriptions}
+        : subscriptions}
     </>
   );
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../img/logo.png';
 
 const Navbar = () => {
   return (
     <nav className="flex">
-      <div className="logo_wrapper flex flex-center">
-        <img src={require('../img/logo.svg').default} alt="mySvgImage" />
+      <div class="logo_wrapper flex flex-center">
+        <img src={logo} alt="mySvgImage" />
         <Link to="/" className="app_name">
           DuckScription
         </Link>
