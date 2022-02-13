@@ -1,7 +1,9 @@
 import React from 'react';
 import duck_image from '../img/duck_signin_singup.png';
 
+
 function SignIn() {
+
   return (
     <div className="signin_wrapper">
       <div className="img_wrapper">
@@ -34,7 +36,7 @@ function SignIn() {
             </a>
           </p>
 
-          <button className="sign_in_btn">Sign in</button>
+          <button className="sign_in_btn" >Sign in</button>
         </form>
       </div>
     </div>

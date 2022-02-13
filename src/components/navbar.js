@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo.png';
+import LoginButton from '../components/LoginButton'
 
 const Navbar = () => {
   return (
@@ -17,6 +18,7 @@ const Navbar = () => {
         <Link to="/signIn" className="sign_up">
           Sign up
         </Link>
+        {/* <LoginButton/> */}
       </div>
     </nav>
   );
