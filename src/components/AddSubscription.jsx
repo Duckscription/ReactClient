@@ -116,7 +116,11 @@ function AddSubscription(props) {
     };
     console.log('Received values of form: ', values);
     setForm(values);
+
+    props.sendToRoles(false);
+  
   };
+
 
   return (
     <MyForm onFinish={onFinish}>
