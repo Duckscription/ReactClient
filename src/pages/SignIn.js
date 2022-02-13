@@ -1,5 +1,5 @@
-import React from "react";
-import duck_image from "../img/duck_signin_singup.png";
+import React from 'react';
+import duck_image from '../img/duck_signin_singup.png';
 
 function SignIn() {
   return (
@@ -25,8 +25,8 @@ function SignIn() {
             <input type="password" name="password" id="" />
           </div>
 
-          <p style={{ marginTop: "17px" }}>
-            You don't have account yet?{" "}
+          <p style={{ marginTop: '17px' }}>
+            You don't have account yet?{' '}
             <a href="">
               <span className="highlight">
                 <strong>Sign Up</strong>
@@ -34,7 +34,7 @@ function SignIn() {
             </a>
           </p>
 
-          <button class="sign_in_btn">Sign in</button>
+          <button className="sign_in_btn">Sign in</button>
         </form>
       </div>
     </div>
