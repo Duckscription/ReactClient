@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import greenCircle from '../img/greenCircle.png';
 // import { getAllSubs } from '../data/mockData';
 import { getAllSubs } from '../api/network';
+import { formatDate } from '../api/networkUtils';
 import {
   AiOutlinePlusSquare,
   AiOutlineDelete,
@@ -72,12 +73,10 @@ function DisplaySubscription(props) {
 
   useEffect(() => {
     getAllSubs(props.userId).then((result) => {
-      console.log('Sources', result.subs);
-      setSubsList(result.subs);
+      console.log('getAllSubs', result.data);
+      setSubsList(result.data.subs);
     });
   }, []);
-
-  console.log(subsList);
 
   const subscriptions = (
     <>
@@ -91,7 +90,8 @@ function DisplaySubscription(props) {
             <ContentWrapper>
               <Text>
                 <img src={greenCircle} />
-                {subsList.dateStart}~{subsList.dateEnd}
+                {formatDate(subsList.dateStart, 'd.m.yy')}~
+                {formatDate(subsList.dateEnd, 'd.m.yy')}
               </Text>
             </ContentWrapper>
             <ContentWrapper>
