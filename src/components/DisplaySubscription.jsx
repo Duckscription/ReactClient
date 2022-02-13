@@ -11,7 +11,7 @@ import {
   AiOutlineEdit,
 } from 'react-icons/ai';
 import AddSubscription from './AddSubscription';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
 const SubsContainer = styled.div`
   font-family: Montserrat;
@@ -33,8 +33,8 @@ const HeadCont = styled.h1`
   font-family: Poppins;
   font-weight: bold;
   font-size: 36px;
-  color: ${props => props.strong ? "#F3477A" : "black"};
-  margin: auto;
+  color: ${(props) => (props.strong ? '#F3477A' : 'black')};
+  margin: 0px 60px;
 `;
 
 const TypeParagraph = styled.p`
@@ -81,13 +81,18 @@ function DisplaySubscription(props) {
     });
   }, []);
 
-const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   const editingSubs = (subId) => (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <SubsContainer>
-         <ContentWrapper>
+          <ContentWrapper>
             <TypeParagraph>{subsList.type}</TypeParagraph>
           </ContentWrapper>
           <ContentWrapper>
@@ -103,44 +108,45 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
           <AiOutlineDelete />
         </SubsContainer>
       </form>
-  </>
+    </>
   );
-
-
-
 
   const subscriptions = (
     <>
-    {subsList.map((subsList, i) => {
-      return (
-        <SubsContainer key={i}>
-          {subsList.title}
-          <ContentWrapper>
-            <TypeParagraph>{subsList.type}</TypeParagraph>
-          </ContentWrapper>
-          <ContentWrapper>
-            <Text>
-              <img src={greenCircle} />
-              {formatDate(subsList.dateStart, 'd.m.yy')}~
-              {formatDate(subsList.dateEnd, 'd.m.yy')}
-            </Text>
-          </ContentWrapper>
-          <ContentWrapper>
-            <Text strong>$ {subsList.price}</Text>
-          </ContentWrapper>
-          <AiOutlineEdit onClick={editingSubs(subsList.id)} />
-          <AiOutlineDelete />
-        </SubsContainer>
-      );
-    })}
-  </>
-  )
-
+      {subsList.map((subsList, i) => {
+        return (
+          <SubsContainer key={i}>
+            {subsList.title}
+            <ContentWrapper>
+              <TypeParagraph>{subsList.type}</TypeParagraph>
+            </ContentWrapper>
+            <ContentWrapper>
+              <Text>
+                <img src={greenCircle} />
+                {formatDate(subsList.dateStart, 'd.m.yy')}~
+                {formatDate(subsList.dateEnd, 'd.m.yy')}
+              </Text>
+            </ContentWrapper>
+            <ContentWrapper>
+              <Text strong>$ {subsList.price}</Text>
+            </ContentWrapper>
+            <AiOutlineEdit
+              onClick={() => {
+                setIsEdit(true);
+              }}
+            />
+            <AiOutlineDelete />
+          </SubsContainer>
+        );
+      })}
+    </>
+  );
 
   return (
     <>
       <HeadCont>
-        You've got<span className="red">{subsList.length} subscriptions</span>
+        You've got &nbsp;
+        <span className="red">{subsList.length} subscriptions </span>
         <AddBtn
           onClick={() => {
             setIsAdd(true);
@@ -151,8 +157,9 @@ const { register, handleSubmit, watch, formState: { errors } } = useForm();
         </AddBtn>
       </HeadCont>
 
-      {isAdd && <AddSubscription user={props.user} sendToRoles={setIsAdd} />}
-      {subscriptions}
+      {isAdd && <AddSubscription user={props.userId} sendToRoles={setIsAdd} />}
+
+      {isEdit ? <editingSubs /> : subscriptions}
     </>
   );
 }
