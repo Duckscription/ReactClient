@@ -68,6 +68,9 @@ export const AddBtn = styled.button`
   color: white;
   height: 40px;
   margin: auto 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 function DisplaySubscription(props) {
@@ -149,7 +152,7 @@ function DisplaySubscription(props) {
               setIsAdd(true);
             }}
           >
-            <AiOutlinePlusSquare />
+            <AiOutlinePlusSquare style={{marginRight:"5px"}} />
             Add New
           </AddBtn>
         </div>

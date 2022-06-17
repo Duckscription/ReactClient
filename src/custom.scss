@@ -147,11 +147,12 @@ nav {
 
 // Sign in
 .signin_wrapper {
+  overflow: hidden;
   display: flex;
   flex-flow: wrap;
   justify-content: center;
   align-content: center;
-  height: calc(100vh - 100px);
+  height: 100vh;
 
   .img_wrapper {
     width: 50%;

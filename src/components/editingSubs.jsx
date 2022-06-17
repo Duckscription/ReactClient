@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // import { addNewSub } from '../data/mockData';
-import { addNewSub } from '../api/network';
+import { addNewSub, getSub } from '../api/network';
 import 'antd/dist/antd.css';
 import { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -97,12 +97,22 @@ const rangeConfig = {
 
 function AddSubscription(props) {
   const [form, setForm] = useState([]);
+  const [data, setData] = useState(null);
 
+  
   useEffect(() => {
-    console.log('hi', props.user);
+    console.log('hi', props.user, props.subId);
+
     addNewSub(form, props.user).then((result) => {
       console.log('data', result);
     });
+
+    getSub(props.subId).then((result) => {
+      setData(result.data.sub);
+      console.log("hwhwhw", result.data.sub);
+    })
+
+
   }, [form]);
 
   const onFinish = (fieldsValue) => {
@@ -135,25 +145,25 @@ function AddSubscription(props) {
       <Row>
         <Col span={12}>
           <Form.Item label="Title" name="title" {...textConfig}>
-            <MyInput />
+            <MyInput placeholder={data?.title}/>
           </Form.Item>
         </Col>
         <Col span={12}>
           <Form.Item label="URL" name="URL">
-            <MyInput />
+            <MyInput placeholder={data?.URL} />
           </Form.Item>
         </Col>
       </Row>
 
       <Row>
         <Col span={12}>
-          <Form.Item label="Price" name="price" {...textConfig}>
-            <MyInput />
+          <Form.Item label="Price" name="price" {...textConfig} >
+            <MyInput  placeholder={data?.price} />
           </Form.Item>
         </Col>
         <Col span={12}>
           <Form.Item label="Type" name="type" {...textConfig}>
-            <MySelect>
+            <MySelect placeholder={data?.type}>
               <Select.Option value="Weekly">Weekly</Select.Option>
               <Select.Option value="Monthly">Monthly</Select.Option>
               <Select.Option value="Yearly">Yearly</Select.Option>
@@ -196,7 +206,7 @@ function AddSubscription(props) {
 
         <Col span={12}>
           <Form.Item label="Note" name="note">
-            <MyInput />
+            <MyInput placeholder={data?.note}/>
           </Form.Item>
         </Col>
       </Row>
